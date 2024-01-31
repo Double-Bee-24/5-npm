@@ -75,19 +75,19 @@ module.exports = {
                 plugins: devMode
                   ? []
                   : [
-                      [
-                        'postcss-preset-env',
-                        {
-                          // Compile our CSS code to support browsers
-                          // that are used in more than 1% of the
-                          // global market browser share. You can modify
-                          // the target browsers according to your needs
-                          // by using supported queries.
-                          // https://github.com/browserslist/browserslist#queries
-                          browsers: ['>1%'],
-                        },
-                      ],
+                    [
+                      'postcss-preset-env',
+                      {
+                        // Compile our CSS code to support browsers
+                        // that are used in more than 1% of the
+                        // global market browser share. You can modify
+                        // the target browsers according to your needs
+                        // by using supported queries.
+                        // https://github.com/browserslist/browserslist#queries
+                        browsers: ['>1%'],
+                      },
                     ],
+                  ],
               },
             },
           },
