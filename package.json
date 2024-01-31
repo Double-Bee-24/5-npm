@@ -31,6 +31,7 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "husky": "^9.0.7",
+    "lint-staged": "^15.2.1",
     "live-server": "^1.2.2",
     "mini-css-extract-plugin": "^2.7.2",
     "postcss": "^8.4.20",
@@ -54,5 +55,11 @@
     "ES6+",
     "live reload",
     "Sass"
-  ]
+  ],
+  "lint-staged": {
+    "./**/*.(ts|js|html)": [
+      "eslint . --fix",
+      "prettier --write --ignore-unknown"
+    ]
+  }
 }
