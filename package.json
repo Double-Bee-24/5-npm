@@ -51,5 +51,8 @@
     "ES6+",
     "live reload",
     "Sass"
-  ]
+  ],
+  "dependencies": {
+    "moment": "^2.30.1"
+  }
 }
