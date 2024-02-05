@@ -32,15 +32,10 @@
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
-    "./*.js": [
-      "eslint . --fix",
-      "prettier --write --ignore-unknown"
+    "src/scripts/*.js": [
+      "eslint src/scripts --fix",
+      "prettier --write src/scripts/**/* --ignore-unknown"
     ]
   },
   "repository": {

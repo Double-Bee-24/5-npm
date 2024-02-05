@@ -1,56 +1,101 @@
-import moment from 'moment';
+import moment from "moment";
 
-const timeValue = document.getElementById('time-value');
+function incrementTime(timeValueElement) {
+  let valueToIncrease = +timeValueElement.innerText;
+  valueToIncrease += 1;
 
-const incrementButton = document.getElementById('increment-button');
-incrementButton.addEventListener('click', () => incrementTime(timeValue));
-
-const decrementButton = document.getElementById('decrement-button');
-decrementButton.addEventListener('click', () => decrementTime(timeValue));
-
-function incrementTime(timeValue) {
-  +timeValue.innerText++;
+  const htmlElement = timeValueElement;
+  htmlElement.innerText = valueToIncrease;
 }
 
-function decrementTime(timeValue) {
-  if (+timeValue.innerText > 0) {
-    +timeValue.innerText--;
+function decrementTime(timeValueElement) {
+  let valueToDecrease = +timeValueElement.innerText;
+
+  if (valueToDecrease > 0) {
+    valueToDecrease -= 1;
   }
+
+  const htmlElement = timeValueElement;
+  htmlElement.innerText = valueToDecrease;
 }
 
-const startButton = document.getElementById('start-button');
-startButton.addEventListener('click', () => startCountDown(timeValue, startButton, incrementButton, decrementButton));
+// Make timer looks like its default display
+function resetCountdownUI(
+  startButton,
+  timeValue,
+  incrementButton,
+  decrementButton,
+) {
+  const firstButton = incrementButton;
+  const secondButton = decrementButton;
+  const leftTime = timeValue;
+  let pauseButton;
 
-function startCountDown(timeValue, startButton, incrementButton, decrementButton) {
-  let duration = moment.duration(timeValue.innerText, 'minutes');
-  incrementButton.style.display = 'none';
-  decrementButton.style.display = 'none';
+  pauseButton.innerText = "Старт";
+  leftTime.innerText = "0";
+  firstButton.style.display = "block";
+  secondButton.style.display = "block";
+}
 
-  if (startButton.innerText === 'Скинути') {
-    startButton.innerText = 'Старт';
-    timeValue.innerText = '0';
-    duration = moment.duration(0, 'minutes');
-    incrementButton.style.display = 'block';
-    decrementButton.style.display = 'block';
+function startCountDown(
+  timeValue,
+  startButton,
+  incrementButton,
+  decrementButton,
+) {
+  const duration = moment.duration(timeValue.innerText, "minutes");
+  // Two buttons that will be hidden and vice versa
+  const firstButton = incrementButton;
+  const secondButton = decrementButton;
+  const pauseButton = startButton;
+
+  firstButton.style.display = "none";
+  secondButton.style.display = "none";
+
+  if (startButton.innerText === "Скинути") {
+    resetCountdownUI(timeValue, startButton, incrementButton, decrementButton);
   } else {
-    startButton.innerText = 'Скинути';
+    pauseButton.innerText = "Скинути";
   }
 
   const interval = setInterval(() => {
-    if (duration.asSeconds() <= 0 || startButton.innerText === 'Старт') {
+    if (duration.asSeconds() <= 0 || startButton.innerText === "Старт") {
       clearInterval(interval);
-      startButton.innerText = 'Старт';
-      timeValue.innerText = '0';
-      duration = moment.duration(0, 'minutes');
-      incrementButton.style.display = 'block';
-      decrementButton.style.display = 'block';
+      resetCountdownUI(
+        timeValue,
+        startButton,
+        incrementButton,
+        decrementButton,
+      );
     } else {
-      duration.subtract(1, 'seconds');
-      const minutes = String(duration.minutes()).padStart(2, '0');
-      const seconds = String(duration.seconds()).padStart(2, '0');
-      timeValue.innerText = `${minutes}:${seconds}`;
+      duration.subtract(1, "seconds");
+      const minutes = String(duration.minutes()).padStart(2, "0");
+      const seconds = String(duration.seconds()).padStart(2, "0");
+
+      const leftTime = timeValue;
+      leftTime.innerText = `${minutes}:${seconds}`;
     }
   }, 1000);
 }
 
-a;
+const timeValueElement = document.getElementById("time-value");
+
+const incrementButton = document.getElementById("increment-button");
+incrementButton.addEventListener("click", () =>
+  incrementTime(timeValueElement),
+);
+
+const decrementButton = document.getElementById("decrement-button");
+decrementButton.addEventListener("click", () =>
+  decrementTime(timeValueElement),
+);
+
+const startButton = document.getElementById("start-button");
+startButton.addEventListener("click", () =>
+  startCountDown(
+    timeValueElement,
+    startButton,
+    incrementButton,
+    decrementButton,
+  ),
+);
