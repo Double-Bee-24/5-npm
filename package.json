@@ -9,7 +9,7 @@
     "dev:assets": "webpack --watch",
     "dev": "live-server --open=./public/ --host=localhost --watch=./public/",
     "build": "NODE_ENV=production webpack",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "devDependencies": {
     "@babel/core": "^7.20.7",
