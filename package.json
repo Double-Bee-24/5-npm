@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev:assets": "webpack --watch",
-    "dev": "live-server --open=./public/ --host=localhost --watch=./public/",
+    "dev": "live-server --open=./ --host=localhost --watch=./",
     "build": "NODE_ENV=production webpack",
     "prepare": "husky"
   },
